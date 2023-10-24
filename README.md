@@ -1,9 +1,9 @@
 # MATRIX-Lite-Py
-[![](https://github.com/matrix-io/matrix-lite-py/workflows/PyPi%20Deployment/badge.svg)](https://pypi.org/project/matrix-lite/)
 
 MATRIX Lite Python is a library that allows users of varying skill levels to easily program their MATRIX Device.
 
-# Roadmap
+## Roadmap
+
 - [x] Leds
 - [x] Sensors
   - [x] IMU
@@ -16,32 +16,38 @@ MATRIX Lite Python is a library that allows users of varying skill levels to eas
   - [x] ALSA Mics (available through any [ALSA wrapper](https://matrix-io.github.io/matrix-documentation/matrix-lite/py-reference/alsa-mics/))
 - [x] [NFC](https://github.com/matrix-io/matrix-lite-nfc-py) (separate library)
 
-# Installation
+## Installation
 
-Ensure you have a Raspberry Pi, attached with a MATRIX device, that's flashed with [Raspbian](https://www.raspberrypi.org/blog/raspbian-stretch/).
+>
+> Make sure you have [MATRIX HAL](https://matrix-io.github.io/matrix-documentation/matrix-hal/getting-started/installation-package/) & Python 3 installed.
 
-## 1. Install MATRIX HAL
-https://matrix-io.github.io/matrix-documentation/matrix-hal/getting-started/installation-package/
+If you want to contribute to matrix-lite-py, below are the steps to build locally. Each step should take place on your Raspberry Pi.
 
-## 2. Install Python 3
-> To call your scripts with python 3, use `python3 YOUR_SCRIPT.py`
-```
-sudo apt-get install python3-pip
-```
-## 3. Upgrade PIP
-```
-python3 -m pip install --upgrade pip
+Download the repository.
+
+```sh
+git clone https://github.com/matrix-io/matrix-lite-py
 ```
 
-## 4. Install matrix-lite-py
-```
-python3 -m pip install --user matrix-lite
+Install pybind11.
+
+```sh
+sudo python3 -m pip install pybind11
 ```
 
-# Usage
+Compile and install the `matrix_lite` python package with your changes.
+
+```sh
+cd matrix-lite-py
+sudo python3 -m pip install ./
+```
+
+## Usage
+
 The matrix-lite package contains a `matrix_lite` & `_matrix_hal` Python module. `_matrix_hal` is the direct HAL implementation. `matrix_lite` contains small abstractions for `_matrix_hal`.
 
-## Everloop
+### Everloop
+
 ```python
 from matrix_lite import led
 import time
@@ -76,7 +82,8 @@ while True:
     time.sleep(0.050)
 ```
 
-## Sensors
+### Sensors
+
 ```python
 from matrix_lite import sensors
 import time
@@ -92,7 +99,8 @@ while True:
     time.sleep(5/1000)
 ```
 
-## GPIO
+### GPIO
+
 ```python
 from matrix_lite import gpio
 
@@ -124,25 +132,4 @@ gpio.setServoAngle({
     # min_pulse_ms (minimum pulse width for a PWM wave in milliseconds)
     "min_pulse_ms": 0.8,
 })
-```
-
-# Building Locally For Development
-> Make sure you have [MATRIX HAL](https://matrix-io.github.io/matrix-documentation/matrix-hal/getting-started/installation-package/) & Python 3 installed.
-
-If you want to contribute to matrix-lite-py, below are the steps to build locally. Each step should take place on your Raspberry Pi.
-
-Download the repository.
-```
-git clone https://github.com/matrix-io/matrix-lite-py
-```
-
-Install pybind11.
-```
-sudo python3 -m pip install pybind11
-```
-
-Compile and install the `matrix_lite` python package with your changes.
-```
-cd matrix-lite-py
-sudo python3 -m pip install ./
 ```
